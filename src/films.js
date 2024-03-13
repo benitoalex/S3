@@ -36,13 +36,28 @@ function orderAlphabetically(movies) {
 }
 
 // Exercise 5: Order by year, ascending
-function orderByYear() {
-  
+function orderByYear(movies) {
+  const sortedMovies = movies.slice();
+  sortedMovies.sort((a, b) => {
+    if (a.year !== b.year) {
+      return a.year - b.year;
+    } else {
+      return a.title.localeCompare(b.title);
+    }
+  });
+
+  return sortedMovies;
 }
 
 // Exercise 6: Calculate the average of the movies in a category
-function moviesAverageByCategory() {
-
+function moviesAverageByCategory(movies, genre) {
+  const genreMovies = movies.filter(movie => movie.genre.includes(genre));
+  if (genreMovies.length === 0) {
+    return 0;
+  } else {
+    const totalScore = genreMovies.reduce((accumulator, movie) => accumulator + movie.score, 0);
+    return totalScore / genreMovies.length;
+  }
 }
 
 // Exercise 7: Modify the duration of movies to minutes
