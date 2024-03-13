@@ -7,8 +7,8 @@ function getAllDirectors(movies) {
 
 // Exercise 2: Get the films of a certain director
 function getMoviesFromDirector(movies, director) {
- const moviesBydirector = movies.filter(movie => movie.director === director);
- return moviesBydirector
+  const moviesBydirector = movies.filter(movie => movie.director === director);
+  return moviesBydirector
 }
 
 // Exercise 3: Calculate the average of the films of a given director.
@@ -17,7 +17,7 @@ function moviesAverageOfDirector(movies, director) {
   const sumScore = directorMovies.reduce((accumulator, movie) => accumulator + movie.score, 0);
   const averageScore = sumScore / directorMovies.length;
   return parseFloat(averageScore.toFixed(2));
-  
+
 }
 
 // Exercise 4:  Alphabetic order by title 
@@ -30,7 +30,7 @@ function orderAlphabetically(movies) {
       return 0;
     }
   });
-  
+
   const titles = sortedMovies.slice(0, 20).map(movie => movie.title);
   return titles;
 }
@@ -61,13 +61,36 @@ function moviesAverageByCategory(movies, genre) {
 }
 
 // Exercise 7: Modify the duration of movies to minutes
-function hoursToMinutes() {
+function hoursToMinutes(movies) {
+  const durArray = movies.filter(movie => movie.duration);
 
+  const moviesWithDurationAsNumber = [];
+
+  durArray.forEach(movie => {
+    const duration = movie.duration;
+    const parts = duration.split(' ');
+    let hours = 0;
+    let minutes = 0;
+    
+    parts.forEach(function (part) {
+      if (part.includes('h')) {
+        hours = parseInt(part);
+      } else if (part.includes('min')) {
+        minutes = parseInt(part);
+      }
+    });
+     const totalMinutes = hours * 60 + minutes;
+
+     
+     moviesWithDurationAsNumber.push({...movie, duration: totalMinutes});
+  });
+  
+  return moviesWithDurationAsNumber;
 }
 
 // Exercise 8: Get the best film of a year
 function bestFilmOfYear() {
-  
+
 }
 
 
